@@ -1,21 +1,21 @@
-var windowWidth = $(window).width();
-var windowHeight = $(window).height();
 var lastSearch = "";
-var url = ["https://en.wikipedia.org/w/api.php?action=opensearch&search=", "&format=json&callback=?"];
+var url_set = ["https://en.wikipedia.org/w/api.php?action=opensearch&search=", "&format=json&callback=?"];
 
 $(document).ready(function(){
 
 var searchFunc = function(){
 	var search = $('#namanyay-search-box').val();
 	if(search !== ""){
-		url = url[0] + search + url[1];
+		url = url_set[0] + search + url_set[1];
+		console.log(url);
 		$.ajax({
 			url: url,
 			type: "GET",
-			async: false,
 			dataType: "json",
-			success: function(data, status, jqXHR){	
+			success: function(data, status, jqXHR){
+				console.log(1);
 				if(lastSearch !== search){
+					console.log(2);
 					$("#output").empty();
 					if(data[1].length == 0){
 						$('#heading').animate({'margin-left': 20}, 500, function(){
@@ -39,8 +39,15 @@ var searchFunc = function(){
 	}
 }
 
-$('#heading').css('margin-left', windowWidth/2-90);
-$('#form').css('margin-left', windowWidth/2-131);
+$('#heading').css('margin-left', $(window).width()/2-90);
+$('#form').css('margin-left', $(window).width()/2-131);
+
+$(window).resize (function(){
+		if (!lastSearch){
+			$('#heading').css('margin-left', $(window).width()/2-90);
+			$('#form').css('margin-left', $(window).width()/2-131);
+		}
+});
 
 	$('#namanyay-search-btn').click(function(){
 		searchFunc();

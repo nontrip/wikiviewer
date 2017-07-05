@@ -93,3 +93,9 @@ a{
 	border:0 none;
 	width:160px;
  }
+
+ @media screen and (max-device-width: 400px) {
+	 #namanyay-search-box {
+		 width: 130px;
+	 }
+ }
