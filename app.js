@@ -5,17 +5,14 @@ $(document).ready(function(){
 
 var searchFunc = function(){
 	var search = $('#namanyay-search-box').val();
-	if(search !== ""){
+	if(search){
 		url = url_set[0] + search + url_set[1];
-		console.log(url);
 		$.ajax({
 			url: url,
 			type: "GET",
 			dataType: "json",
 			success: function(data, status, jqXHR){
-				console.log(1);
 				if(lastSearch !== search){
-					console.log(2);
 					$("#output").empty();
 					if(data[1].length == 0){
 						$('#heading').animate({'margin-left': 20}, 500, function(){
@@ -36,6 +33,8 @@ var searchFunc = function(){
 					}
 				}
 		}});
+	} else {
+		window.open("https://en.wikipedia.org/wiki/Special:Random");
 	}
 }
 
